@@ -1,0 +1,12 @@
+{
+  "domain": "ha_windhager_bio_win_2",
+  "name": "Windhager BioWin 2",
+  "codeowners": [
+    "@stranderer"
+  ],
+  "config_flow": true,
+  "documentation": "https://github.com/stranderer/ha_windhager_bio_win_2",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/stranderer/ha_windhager_bio_win_2/issues",
+  "version": "0.0.0"
+}

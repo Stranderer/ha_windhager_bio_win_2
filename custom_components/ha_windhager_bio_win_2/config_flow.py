@@ -7,18 +7,21 @@ from homeassistant.const import CONF_PASSWORD, CONF_USERNAME
 from homeassistant.helpers import selector
 from homeassistant.helpers.aiohttp_client import async_create_clientsession
 
+
 from .api import (
-    IntegrationBlueprintApiClient,
-    IntegrationBlueprintApiClientAuthenticationError,
-    IntegrationBlueprintApiClientCommunicationError,
-    IntegrationBlueprintApiClientError,
+    BioWin2TouchApiClient,
+    BioWin2TouchApiClientAuthenticationError,
+    BioWin2TouchApiClientCommunicationError,
+    BioWin2TouchApiClientError,
 )
 from .const import DOMAIN, LOGGER
 
 
 class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
+
     """Config flow for Blueprint."""
 
+    # Look at https://github.com/danieldotnl/ha-multiscrape/blob/master/custom_components/multiscrape/http.py for auth digest (line 32)
     VERSION = 1
 
     async def async_step_user(
@@ -33,13 +36,13 @@ class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
                     username=user_input[CONF_USERNAME],
                     password=user_input[CONF_PASSWORD],
                 )
-            except IntegrationBlueprintApiClientAuthenticationError as exception:
+            except BioWin2TouchApiClientAuthenticationError as exception:
                 LOGGER.warning(exception)
                 _errors["base"] = "auth"
-            except IntegrationBlueprintApiClientCommunicationError as exception:
+            except BioWin2TouchApiClientCommunicationError as exception:
                 LOGGER.error(exception)
                 _errors["base"] = "connection"
-            except IntegrationBlueprintApiClientError as exception:
+            except BioWin2TouchApiClientError as exception:
                 LOGGER.exception(exception)
                 _errors["base"] = "unknown"
             else:
@@ -72,9 +75,8 @@ class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
 
     async def _test_credentials(self, username: str, password: str) -> None:
         """Validate credentials."""
-        client = IntegrationBlueprintApiClient(
+        client = BioWin2TouchApiClient(
             username=username,
             password=password,
-            session=async_create_clientsession(self.hass),
         )
         await client.async_get_data()
