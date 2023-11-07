@@ -5,7 +5,7 @@ import asyncio
 import async_timeout
 
 import httpx
-import logging
+from .const import LOGGER
 
 
 class BioWin2TouchApiClientError(Exception):
@@ -39,13 +39,13 @@ class BioWin2TouchApiClient:
         """Get information from the API."""
         try:
             async with async_timeout.timeout(10):
+
                 response = await self._client.get(url=self._url, auth=self._auth)
                 if response.status_code in (401, 403):
                     raise BioWin2TouchApiClientAuthenticationError(
                         "Invalid credentials",
                     )
                 response.raise_for_status()
-                logging.debug(response.json)
                 return response.json()
 
         except asyncio.TimeoutError as exception:

@@ -18,6 +18,8 @@ from .api import (
 )
 from .const import DOMAIN, LOGGER
 
+DEFAULT_UPDATE_INTERVAL_MINUTES = 5
+
 
 # https://developers.home-assistant.io/docs/integration_fetching_data#coordinated-single-api-poll-for-data-for-all-entities
 class BioWin2TouchDataUpdateCoordinator(DataUpdateCoordinator):

@@ -9,7 +9,7 @@ from homeassistant.components.binary_sensor import (
 
 from .const import DOMAIN
 from .coordinator import BioWin2TouchDataUpdateCoordinator
-from .entity import IntegrationBlueprintEntity
+from .entity import BioWin2Entity
 
 ENTITY_DESCRIPTIONS = (
     BinarySensorEntityDescription(
@@ -32,7 +32,7 @@ async def async_setup_entry(hass, entry, async_add_devices):
     )
 
 
-class IntegrationBlueprintBinarySensor(IntegrationBlueprintEntity, BinarySensorEntity):
+class IntegrationBlueprintBinarySensor(BioWin2Entity, BinarySensorEntity):
     """ha_windhager_bio_win_2 binary_sensor class."""
 
     def __init__(
