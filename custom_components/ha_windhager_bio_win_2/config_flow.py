@@ -5,7 +5,6 @@ import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.const import CONF_PASSWORD, CONF_USERNAME
 from homeassistant.helpers import selector
-from homeassistant.helpers.aiohttp_client import async_create_clientsession
 
 
 from .api import (
@@ -57,13 +56,20 @@ class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
                 {
                     vol.Required(
                         CONF_USERNAME,
-                        default=(user_input or {}).get(CONF_USERNAME),
+                        default=(user_input or {CONF_USERNAME: "Service"}).get(
+                            CONF_USERNAME
+                        ),
                     ): selector.TextSelector(
                         selector.TextSelectorConfig(
                             type=selector.TextSelectorType.TEXT
                         ),
                     ),
-                    vol.Required(CONF_PASSWORD): selector.TextSelector(
+                    vol.Required(
+                        CONF_PASSWORD,
+                        default=(user_input or {CONF_PASSWORD: "123"}).get(
+                            CONF_PASSWORD
+                        ),
+                    ): selector.TextSelector(
                         selector.TextSelectorConfig(
                             type=selector.TextSelectorType.PASSWORD
                         ),

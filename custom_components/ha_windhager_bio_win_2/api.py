@@ -39,7 +39,6 @@ class BioWin2TouchApiClient:
         """Get information from the API."""
         try:
             async with async_timeout.timeout(10):
-
                 response = await self._client.get(url=self._url, auth=self._auth)
                 if response.status_code in (401, 403):
                     raise BioWin2TouchApiClientAuthenticationError(
@@ -47,6 +46,7 @@ class BioWin2TouchApiClient:
                     )
                 response.raise_for_status()
                 return response.json()
+                # return {"OID": "0/0/0/0/0/0/0", "value": 31.5}
 
         except asyncio.TimeoutError as exception:
             raise BioWin2TouchApiClientCommunicationError(

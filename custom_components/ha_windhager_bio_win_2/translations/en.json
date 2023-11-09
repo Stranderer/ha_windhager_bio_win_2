@@ -2,7 +2,7 @@
     "config": {
         "step": {
             "user": {
-                "description": "If you need help with the configuration have a look here: https://github.com/ludeeus/ha_windhager_bio_win_2",
+                "description": "Default credentials for the heater are Service // 123. Specifiy the password, if default was overriden. <br/> If you need help with the configuration have a look here: https://github.com/Stranderer/ha_windhager_bio_win_2",
                 "data": {
                     "username": "Username",
                     "password": "Password"
@@ -11,7 +11,7 @@
         },
         "error": {
             "auth": "Username/Password is wrong.",
-            "connection": "Unable to connect to the server.",
+            "connection": "Unable to connect to the heater.",
             "unknown": "Unknown error occurred."
         }
     }

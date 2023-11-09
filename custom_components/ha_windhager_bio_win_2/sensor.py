@@ -1,20 +1,26 @@
 """Sensor platform for ha_windhager_bio_win_2."""
 from __future__ import annotations
 
-from homeassistant.components.sensor import SensorEntity, SensorEntityDescription, SensorDeviceClass, SensorStateClass
+from homeassistant.components.sensor import (
+    SensorEntity,
+    SensorEntityDescription,
+    SensorDeviceClass,
+    SensorStateClass,
+)
 from .const import DOMAIN, LOGGER
 from .coordinator import BioWin2TouchDataUpdateCoordinator
 from .entity import BioWin2Entity
 
-ENTITY_DESCRIPTIONS = ( [
-    "oid",
-    SensorEntityDescription(
-        key="bioWin2_Sensor",
-        device_class=SensorDeviceClass.TEMPERATURE,
-        state_class=SensorStateClass.MEASUREMENT,
-    ),]
-
-)
+ENTITY_DESCRIPTIONS = [
+    {
+        "oid": "0/0/0/0/0/0/0/0",
+        "descr": SensorEntityDescription(
+            key="bioWin2_Sensor",
+            device_class=SensorDeviceClass.TEMPERATURE,
+            state_class=SensorStateClass.MEASUREMENT,
+        ),
+    },
+]
 
 
 async def async_setup_entry(hass, entry, async_add_devices):
@@ -23,8 +29,8 @@ async def async_setup_entry(hass, entry, async_add_devices):
     async_add_devices(
         BioWin2Sensor(
             coordinator=coordinator,
-            entity_description=entity_description[1],
-            oid = entity_description[0]
+            entity_description=entity_description["descr"],
+            oid=entity_description["oid"],
         )
         for entity_description in ENTITY_DESCRIPTIONS
     )
@@ -37,7 +43,7 @@ class BioWin2Sensor(BioWin2Entity, SensorEntity):
         self,
         coordinator: BioWin2TouchDataUpdateCoordinator,
         entity_description: SensorEntityDescription,
-        oid:str
+        oid: str,
     ) -> None:
         """Initialize the sensor class."""
         super().__init__(coordinator, oid)
