@@ -4,4 +4,6 @@ set -e
 
 cd "$(dirname "$0")/.."
 
-python3 -m pip install --requirement requirements.txt
+pip3 install --requirement requirements.txt
+
+pip3 install git+https://github.com/boto/botocore
