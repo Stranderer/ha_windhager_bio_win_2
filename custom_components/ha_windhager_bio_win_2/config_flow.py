@@ -17,7 +17,6 @@ from .const import DOMAIN, LOGGER
 
 
 class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
-
     """Config flow for Blueprint."""
 
     # Look at https://github.com/danieldotnl/ha-multiscrape/blob/master/custom_components/multiscrape/http.py for auth digest (line 32)

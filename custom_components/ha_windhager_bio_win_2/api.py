@@ -5,7 +5,6 @@ import asyncio
 import async_timeout
 
 import httpx
-from .const import LOGGER
 
 
 class BioWin2TouchApiClientError(Exception):

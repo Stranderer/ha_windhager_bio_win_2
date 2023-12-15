@@ -6,6 +6,7 @@ from homeassistant.components.sensor import (
     SensorEntityDescription,
     SensorDeviceClass,
     SensorStateClass,
+    UnitOfTemperature,
 )
 from .const import DOMAIN, LOGGER
 from .coordinator import BioWin2TouchDataUpdateCoordinator
@@ -18,6 +19,7 @@ ENTITY_DESCRIPTIONS = [
             key="bioWin2_Sensor",
             device_class=SensorDeviceClass.TEMPERATURE,
             state_class=SensorStateClass.MEASUREMENT,
+            unit_of_measurement=UnitOfTemperature.CELSIUS,
         ),
     },
 ]
